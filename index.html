@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="academyApp">
+<html lang="en" ng-app="SomtexAcademy">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,12 +26,96 @@
 <body ng-controller="MainController">
     
     <div class="ticker animate__animated animate__fadeInLeft">
-        <marquee>📢 Welcome to Somtex Academy! Enroll Now! </marquee>
+        <marquee>📢 Welcome to Somtex Academy ! Admission Open, Enroll Now ! </marquee>
     </div>
+    
+    
+    <!-- Add this inside your <head> tag -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<!-- Add this inside your existing <style> tag -->
+<style>
+    /* Flex container for logo and title */
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Centers content */
+        gap: 10px; /* Space between logo and title */
+        padding: 10px 0;
+        flex-wrap: wrap; /* Ensures wrapping on small screens */
+        text-align: center;
+    }
+
+    /* Logo styling */
+    .logo {
+        width: 70px; /* Default size */
+        height: 70px;
+        border-radius: 50%; /* Makes it circular */
+        object-fit: cover; /* Ensures proper fit */
+        border: 3px solid white; /* Elegant border */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Professional shadow */
+        transition: transform 0.3s ease-in-out; /* Smooth animation */
+    }
+
+    .logo:hover {
+        transform: scale(1.1); /* Zoom effect */
+    }
+
+    /* Title styling */
+    .academy-title {
+        font-family: 'Playfair Display', serif; /* Elegant professional font */
+        font-weight: bold;
+        font-style: italic;
+        font-size: 2rem; /* Default size */
+        color: white;
+        white-space: nowrap; /* Prevents wrapping */
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column; /* Stack logo & title on small screens */
+            gap: 8px; /* Reduce spacing */
+        }
+
+        .logo {
+            width: 60px; /* Slightly smaller logo */
+            height: 60px;
+        }
+
+        .academy-title {
+            font-size: 1.8rem; /* Adjust font size */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .academy-title {
+            font-size: 1.6rem;
+        }
+    }
+</style>
+
+<!-- Add this inside your <body> -->
+<div class="container text-center my-3">
+    <div class="header-container">
+        <a href="mailto:somtexacademy@gmail.com">
+            <img src="https://i.imgur.com/uHAyItp.png" alt="Somtex Academy Logo" class="logo">
+        </a>
+        <h1 class="academy-title">SOMTEX ACADEMY</h1>
+    </div>
+</div>
+
+
     
     <div class="container text-center my-3">
         <h2 class="text-3xl">📜 Notice Board</h2>
         <p>All important announcements will be displayed here.</p>
+        
     </div>
     
     <button class="btn btn-dark position-absolute top-0 end-0 m-3" onclick="toggleDarkMode()">🌙</button>
@@ -56,7 +140,7 @@
     </div>
     
     <div class="container text-center my-5">
-        <h1 class="text-4xl font-bold animate__animated animate__fadeIn">Top Students</h1>
+        <h1 class="text-4xl font-bold animate__animated animate__fadeIn">Star Performers</h1>
     </div>
     
     <div id="students" class="container grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
@@ -79,17 +163,22 @@
                 <div class="flip-card-inner">
                     <div class="flip-card-front card p-4 shadow-lg">
                         <img :src="review.photo" class="rounded-circle mb-3" width="80">
-                        <h4>{{ review.parent }}</h4>
-                        <p>Parent of: {{ review.student }}</p>
+                        <h1>Hear From Our Parents</h4>
+                        <h5>------</h1>
+                        <p2>"Somtex Academy has exceeded my expectations. The faculty is knowledgeable and supportive, making sure every student gets the best education." </p2>
                     </div>
                     <div class="flip-card-back">
-                        <p>{{ review.text }}</p>
+                        <h1>Words from Our Parents</h1>
+                        <h2>------</h2>
+                        <p>"The best decision we made was enrolling our child at Somtex Academy. The teachers put in tremendous effort to make learning easy and enjoyable. Regular tests and personal attention have helped my child improve significantly." </p5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
+    
+
     <div class="container text-center my-5">
         <button class="btn btn-danger" onclick="window.location.href='tel:‪7991390381'">📞 Call Us For More Information. </button>
        
@@ -102,15 +191,17 @@
     </div>
     
     <div class="container text-center my-5">
-        <button class="btn btn-success" onclick="document.getElementById('qr-section').style.display='block'">💰 Pay Fees</button>
+        <button class="btn btn-success" onclick="document.getElementById('qr-section').style.display='block'"> Pay Fees</button>
         <div id="qr-section" class="qr-section my-3">
             <img src="https://i.imgur.com/byOH2q3.png" alt="Payment QR Code" width="500">
             
 <p>                       </p>
-            <p>Scan the QR code to pay and send a screenshot to provided number.  </p>
+            <p>Scan the QR code to pay from digital payments apps and send a screenshot to provided number.  </p>
         </div>
-    </div>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+
+
 
     <script>
         function toggleDarkMode() {
@@ -118,35 +209,37 @@
             document.body.classList.toggle('text-white');
         }
         
-          
+  
         new Vue({
         el: '#students',
         data: {
             students: [
-                { name: "Virat Tiwari", class: "V", board: "CBSE", remark: "Very Best Performance", photo: "https://i.imgur.com/Vw4fSnt.png" },
-                { name: "Ansh Maurya", class: "VI", board: "ICSE", remark: "Very Best Performance", photo: "https://i.imgur.com/jxyKrBs.png" },
-                { name: "Chandani", class: "VII", board: "ICSE", remark: "Very Best Performance", photo: "https://i.imgur.com/QQEJbCk.png" },
-                { name: "Anirudh Verma", class: "VII", board: "ICSE", remark: "Excellent", photo: "https://i.imgur.com/OZdD1gb.png" },
+                { name: "Virat Tiwari", class: "V", board: "CBSE", remark: "Hardworking", photo: "https://i.imgur.com/Vw4fSnt.png" },
+                { name: "Ansh Maurya", class: "VI", board: "ICSE", remark: "Best Performance", photo: "https://i.imgur.com/jxyKrBs.png" },
+                { name: "Chandani", class: "VII", board: "ICSE", remark: "Hardworking", photo: "https://i.imgur.com/QQEJbCk.png" },
+                { name: "Anirudh Verma", class: "VII", board: "ICSE", remark: "Innovative Mind", photo: "https://i.imgur.com/OZdD1gb.png" },
                 { name: "Anshuman Bajpai", class: "VII", board: "ICSE", remark: "Outstanding", photo: "https://i.imgur.com/vK3tkXq.png" },
-                { name: "Ammar Ansari", class: "X", board: "ICSE", remark: "Top Scorer", photo: "amit.jpg" },
-                { name: "Piyush Mishra", class: "X", board: "ICSE", remark: "Brilliant Student", photo: "priya.jpg" },
-                { name: "Shivansh Sharma", class: "X", board: "ICSE", remark: "Great Improvement", photo: "https://i.imgur.com/HtjN8Y8.png" },
-                { name: "Anshika Gautam", class: "X", board: "ICSE", remark: "Very Active", photo: "neha.jpg" },
-                { name: "Arpit Yadav", class: "X", board: "CBSE", remark: "Bright Future", photo: "https://i.imgur.com/4YaWmpY.jpeg" },
-                { name: "Adarsh Kumar Singh", class: "X", board: "ICSE", remark: "Hardworking", photo: "https://i.imgur.com/XJL0wtq.png" },
-                { name: "Shivendra Tripathi", class: "X", board: "ICSE", remark: "Disciplined", photo: "https://i.imgur.com/nn8vCsN.jpeg" },
-                { name: "Raj {Surname error correction}", class: "X", board: "UP", remark: "Excellent Performance", photo: "https://i.imgur.com/Dc3RAXE.png" },
-                { name: "Aditya Kumar", class: "X", board: "CBSE", remark: "Top Ranker", photo: "https://i.imgur.com/fl4lNWX.png" },
-                { name: "Vimal Upadhyay", class: "XI", board: "CBSE", remark: "Best in Science", photo: "https://i.imgur.com/XNTwk7M.png" },
-                { name: "Deepak Chauhan", class: "6th", board: "ICSE", remark: "Mathematical Genius", photo: "deepak.jpg" },
-                { name: "Vaishali Tripathi", class: "B.SC", remark: "Highly Motivated", photo: "pooja.jpg" },
-                { name: "Shalini Kumari", class: "XII", board: "UP", remark: "ALLUMNI", photo: "arjun.jpg" },
-                { name: "Sanya Mehta", class: "8th", board: "CBSE", remark: "Creative Thinker", photo: "sanya.jpg" },
-                { name: "Mahima Singh", class: "B.Sc [III Y]", board: "ICSE", remark: "Always Curious", photo: "rajeev.jpg" },
-                { name: "User", class: "12th", board: "CBSE", remark: "Leader", photo: "simran.jpg" },
-                { name: "User", class: "7th", board: "CBSE", remark: "Best Speaker", photo: "gaurav.jpg" },
-                { name: "Meenal Jain", class: "6th", board: "ICSE", remark: "Hardworking", photo: "meenal.jpg" },
-                { name: "Userrrr", class: "9th", board: "CBSE", remark: "Innovative Mind", photo: "anirudh.jpg" }
+                { name: "Ammar Ansari", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/M66vwSM.png" },
+                { name: "Piyush Mishra", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/LFSmn8C.png" },
+                { name: "Shivansh Sharma", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/cr7AwoU.png" },
+                { name: "Anshika Gautam", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/m8w1ADS.png" },
+                { name: "Arpit Yadav", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/JNCbXB3.png" },
+                { name: "Adarsh Kumar Singh", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/XJL0wtq.png" },
+                { name: "Shivendra Tripathi", class: "X", board: "ICSE", remark: "Excellent Performance", photo: "https://i.imgur.com/nn8vCsN.jpeg" },
+                { name: "Raj Ranjan", class: "X", board: "UP", remark: "Excellent Performance", photo: "https://i.imgur.com/q45vKho.png" },
+                { name: "Ritesh Kumar", class: "X", board: "UP", remark: "Excellent Performance", photo: "https://i.imgur.com/gdygczX.png" },
+                 { name: "Hariom Gupta", class: "VIII", board: "CBSE", remark: "Excellent Performance", photo: "https://i.imgur.com/JDQkU28.png" },
+                { name: "Aditya Kumar", class: "X", board: "CBSE", remark: "Regular", photo: "https://i.imgur.com/fl4lNWX.png" },
+                { name: "Vimal Upadhyay", class: "XI", board: "CBSE", remark: "Excellent", photo: "https://i.imgur.com/XNTwk7M.png" },
+               // { name: "Deepak Chauhan", class: "6th", board: "ICSE", remark: "Mathematical Genius", photo: "deepak.jpg" },
+                { name: "Vaishali Tripathi", class: "B.SC", remark: "Highly Motivated", photo: "https://i.imgur.com/uJQp320.png" },
+                { name: "Shalini Kumari", class: "XII", board: "UP", remark: "Highly Motivated", photo: "https://i.imgur.com/ea4hfZv.png" },
+              // { name: "Hariom Gupta", class: "VIII", board: "CBSE", remark: "Creative Thinker", photo: "sanya.jpg" },
+                { name: "Mahima Singh", class: "B.Sc [III Y]", board: "ICSE", remark: "Highly Motivated", photo: "https://i.imgur.com/mXDMd9T.png" },
+               // { name: "Ritesh Kumar", class: "X", board: "UP", remark: "Leader", photo: "simran.jpg" },
+                // { name: "User", class: "7th", board: "CBSE", remark: "Best Speaker", photo: "gaurav.jpg" },
+                // { name: "Meenal Jain", class: "6th", board: "ICSE", remark: "Hardworking", photo: "meenal.jpg" },
+               // { name: "Userrrr", class: "9th", board: "CBSE", remark: "Innovative Mind", photo: "anirudh.jpg" }
             ]
         }
     });
@@ -156,10 +249,10 @@
         data: {
             teachers: [
                 { name: "Deepak Kumar Gupta", experience: 5, qualification: "Master of Computer Applications", classes: "Software Development, Java, Python, C++, .NET, O Level, CCC, DCA, ADCA, B.Tech, MCA, BCA.", subject: "Programming Langauges and Computer & Technology", photo: "https://i.imgur.com/7zPSpLY.jpeg" },
-                { name: "Vipin Sharma", experience: 4, qualification: "M.Tech in Computer Science", classes: " Specializing in Software Development, React.js, Data Science, Artificial Intelligence (AI), Data Analytics, Data Structures, PHP, MySQL", subject: "Computer", photo: "https://i.imgur.com/VlazN4c.png" },
-                { name: "Abhishek Maurya", experience: 3, qualification: "B.Sc. in Mathematics and Pursuing MCA (Master of Computer Applications)", classes: "VI-XII", subject: "Mathematics", photo: "https://i.imgur.com/gUoI6Mt.png" },
-                { name: "Vaibhav Shukla", experience: 2, qualification: "BSc & CGL Pre-Qualified", classes: "IX-XII", subject: "Specializing in Physics and Mathematics Education.", photo: "pi.png" },
-                { name: "Surendra Pal Singh", experience: 14, qualification: "Ph.D.", classes: "IX-XII", subject: "Specializing in Biology and Chemistry", photo: "is.jpg" },
+                { name: "Vipin Sharma", experience: 4, qualification: "M.Tech in Computer Science", classes: " Specializing in Software Development, React.js, Data Science, Artificial Intelligence (AI), Data Analytics, Data Structures, PHP, MySQL", subject: "Computer Science", photo: "https://i.imgur.com/VlazN4c.png" },
+                { name: "Abhishek Maurya", experience: 5, qualification: "B.Sc. in Mathematics and Pursuing MCA (Master of Computer Applications)", classes: "IX-XII", subject: "Mathematics", photo: "https://i.imgur.com/gUoI6Mt.png" },
+                { name: "Vaibhav Shukla", experience: 2, qualification: "Bachelor of Education in Mathematics", classes: "IX-XII", subject: "Physics and Mathematics ", photo: "pi.png" },
+                { name: "Surendra Pal Singh", experience: 14, qualification: "Ph.D.", classes: "IX-XII", subject: "Biology and Chemistry", photo: "is.jpg" },
                 //{ name: "Khusboo ", experience: 22, qualification: "M.Sc. Biology", classes: "11-12", subject: "Biology", photo: "pankaj.jpg" },
                 //{ name: "Commerce Teacher", experience: 8, qualification: "M.A. Hindi", classes: "6-10", subject: "Hindi", photo: "sonal.jpg" }
                 
@@ -169,12 +262,13 @@
 </script>
 </body>
 </html>
+
 <!-- Vue.js -->
 <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
 
 <script>
-    // Strong Security Features 🚀
-    document.addEventListener("contextmenu", event => event.preventDefault()); // Disable Right Click
+    // 🚫 Disable Right Click, Inspect Element, and View Source
+    document.addEventListener("contextmenu", event => event.preventDefault());
     document.addEventListener("keydown", event => {
         if (
             event.key === "F12" || 
@@ -182,27 +276,45 @@
             (event.ctrlKey && event.key === "U") || 
             (event.ctrlKey && event.shiftKey && event.key === "C")
         ) {
-            event.preventDefault(); // Block DevTools, View Source, and Inspect Element
+            event.preventDefault();
         }
     });
 
-    // Disable Drag & Copying
-    document.addEventListener("copy", event => event.preventDefault());
-    document.addEventListener("cut", event => event.preventDefault());
-    document.addEventListener("paste", event => event.preventDefault());
-    document.addEventListener("dragstart", event => event.preventDefault());
+    // 🛡 Prevent Copy, Cut, Paste & Drag
+    ["copy", "cut", "paste", "dragstart"].forEach(event => {
+        document.addEventListener(event, e => e.preventDefault());
+    });
 
-    // Block Bots & Spammers
-    let requestCount = 0;
-    setInterval(() => { requestCount = 0; }, 60000); // Reset every minute
-    document.addEventListener("mousemove", () => { requestCount++; });
-    document.addEventListener("keydown", () => { requestCount++; });
-    if (requestCount > 100) {
-        alert("Too many requests! Access blocked.");
-        window.location.href = "about:blank";
+    // 🚀 Advanced Bot & Spam Protection
+    let requestAttempts = 0;
+    setInterval(() => { requestAttempts = 0; }, 30000); // Reset every 30 sec
+
+    document.addEventListener("mousemove", () => { requestAttempts++; });
+    document.addEventListener("keydown", () => { requestAttempts++; });
+
+    if (requestAttempts > 50) { 
+        alert("⚠ Too many suspicious actions! You are blocked.");
+        document.body.innerHTML = ""; // Hide website content
     }
 
-    // Secure Vue.js App
+    // 🔥 Detect DevTools Open & Block Access
+    setInterval(function() {
+        var before = new Date().getTime();
+        debugger;
+        var after = new Date().getTime();
+        if (after - before > 10) {
+            document.body.innerHTML = "<h1 style='text-align:center;color:red;'>Access Denied!</h1>";
+        }
+    }, 1000);
+
+    // 🛡 Prevent XSS (Cross-Site Scripting) Attacks
+    document.addEventListener("input", function(event) {
+        if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+            event.target.value = event.target.value.replace(/[<>`"'&]/g, '');
+        }
+    });
+
+    // 🚀 Vue.js Secure App
     const app = Vue.createApp({
         data() {
             return { message: "Your website is fully secured & works offline!" };
@@ -215,25 +327,21 @@
     });
     app.mount("#app");
 
-    // Super Strong Offline Support (Caches Everything)
+    // ⚡ Super Strong Offline Mode (Caches Everything)
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register(URL.createObjectURL(new Blob([`
-            const CACHE_NAME = "secure-site-cache-v2";
-            const FILES_TO_CACHE = ["/", window.location.href];
-
+            const CACHE_NAME = "secure-site-cache-v3";
             self.addEventListener("install", event => {
                 event.waitUntil(
                     caches.open(CACHE_NAME).then(cache => {
-                        return cache.addAll(FILES_TO_CACHE);
+                        return cache.addAll(["/", window.location.href]);
                     })
                 );
             });
 
             self.addEventListener("fetch", event => {
                 event.respondWith(
-                    caches.match(event.request).then(response => {
-                        return response || fetch(event.request);
-                    })
+                    caches.match(event.request).then(response => response || fetch(event.request))
                 );
             });
 
@@ -249,14 +357,4 @@
             });
         `], { type: "application/javascript" })));
     }
-
-    // Prevent JavaScript Debugging & Obfuscate Code
-    (function () {
-        function disableDebugger() {
-            setInterval(() => {
-                (function () { return false; })["constructor"]("debugger")();
-            }, 100);
-        }
-        disableDebugger();
-    })();
 </script>
