@@ -326,15 +326,6 @@
         }
     });
     app.mount("#app");
-    // Preventing Screenshott
-    
-    document.addEventListener("keyup", function(event) {
-        if (event.key === "PrintScreen") {
-            alert("Screenshots are disabled!");
-            navigator.clipboard.writeText("");
-        }
-    });
-
 
 
     // ⚡ Super Strong Offline Mode (Caches Everything)
