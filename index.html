@@ -199,10 +199,7 @@
 <p>                       </p>
             <p>Scan the QR code to pay from digital payments apps and send a screenshot to provided number.  </p>
         </div>
- <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold text-center my-6">Event Planner</h1>
-    
-    <div id="calendar" class="bg-white p-4 shadow-lg rounded-lg"></div>
+ 
     
     <div class="my-10 text-center">
         <h2 class="text-2xl font-semibold mb-4">Inside Somtex Academy</h2>
@@ -218,35 +215,8 @@
     <p>All rights reserved.</p>
 </footer>
 
-<script>
-    function generateCalendar(year, month) {
-        let daysInMonth = new Date(year, month + 1, 0).getDate();
-        let firstDay = new Date(year, month, 1).getDay();
-        let table = `<table class='table table-bordered text-center'><thead><tr>
-                    <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead><tbody>`;
-        let date = 1;
-        for (let i = 0; i < 6; i++) {
-            table += "<tr>";
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < firstDay) {
-                    table += "<td></td>";
-                } else if (date > daysInMonth) {
-                    break;
-                } else {
-                    table += `<td data-event='Event on ${month + 1}/${date}/${year}'>${date}</td>`;
-                    date++;
-                }
-            }
-            table += "</tr>";
-        }
-        table += "</tbody></table>";
-        document.getElementById("calendar").innerHTML = table;
-    }
 
-    let today = new Date();
-    generateCalendar(today.getFullYear(), today.getMonth());
-</script>
-
+   
 
     <script>
         function toggleDarkMode() {
