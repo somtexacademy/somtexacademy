@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> Somtex Admission Form </title>
+  <title> Somtex Academy Admission Form </title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -45,9 +45,9 @@
     </div>
 
     <!-- Form Title -->
-    <h1 class="text-4xl font-bold text-center mb-4 text-indigo-800">Apply for Admission Form</h1>
+    <h1 class="text-4xl font-bold text-center mb-4 text-indigo-800">Apply for Admission </h1>
     <p class="text-center text-gray-500 mb-8 max-w-md mx-auto">
-      Your future starts here. Complete the form below and we'll be in touch shortly.
+      Complete the form below and we'll be in touch shortly.
     </p>
 
     <form @submit.prevent="submitForm" class="space-y-6" novalidate>
@@ -61,7 +61,7 @@
 
       <div>
         <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
-        <input v-model="form.phone" type="tel" id="phone" required placeholder="0000000000"
+        <input v-model="form.phone" type="tel" id="phone" required placeholder="0123456789"
           class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400" />
         <p v-if="errors.phone" class="text-red-600 text-sm mt-1">{{ errors.phone }}</p>
       </div>
@@ -91,7 +91,7 @@
         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md transition duration-300 disabled:opacity-60">
         <span v-if="loading"
           class="inline-block animate-spin mr-2 border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
-        Submit Application
+      Submit Application
       </button>
     </form>
 
@@ -105,7 +105,7 @@
 
     <!-- Footer -->
     <div class="text-center text-xs text-gray-400 mt-10">
-      &copy; 2025 Somtex Academy. All rights reserved.
+      &copy; 2025 Somtex Academy.
     </div>
   </div>
 
@@ -162,7 +162,7 @@
 
             if (!res.ok) throw new Error('Failed to submit');
 
-            this.successMessage = 'Your application has been submitted successfully! We will contact you soon.';
+            this.successMessage = 'Your application has been submitted successfully ! We will contact you soon.';
             this.form.name = '';
             this.form.phone = '';
             this.form.email = '';
