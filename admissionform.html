@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Admission Form</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <style>
+    @keyframes fadeSlideIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fadeSlideIn {
+      animation: fadeSlideIn 0.6s ease-in-out forwards;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+    }
+    .gold-gradient {
+      background: linear-gradient(to right, #fcd34d, #facc15);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-tr from-indigo-50 via-white to-indigo-100 min-h-screen flex items-center justify-center p-6">
+
+  <div id="app" class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-10 fadeSlideIn">
+    
+    <!-- Header with Logo and Trust Badge -->
+    <div class="flex justify-between items-center mb-8">
+      <img src="https://i.imgur.com/pc8jsuz.png" alt="Logo" class="h-16" />
+      <div class="flex items-center gap-2 text-sm text-green-600 font-semibold">
+        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-4.586l5.293-5.293-1.414-1.414L9 11.586 7.121 9.707 5.707 11.121 9 14.414z" clip-rule="evenodd"/></svg>
+        Trusted & Secure
+      </div>
+    </div>
+
+    <!-- Form Title -->
+    <h1 class="text-4xl font-bold text-center mb-4 text-indigo-800">Apply for Admission</h1>
+    <p class="text-center text-gray-500 mb-8 max-w-md mx-auto">
+      Your future starts here. Complete the form below and we'll be in touch shortly.
+    </p>
+
+    <form @submit.prevent="submitForm" class="space-y-6" novalidate>
+
+      <div>
+        <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+        <input v-model="form.name" type="text" id="name" required placeholder="John Doe"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400" />
+        <p v-if="errors.name" class="text-red-600 text-sm mt-1">{{ errors.name }}</p>
+      </div>
+
+      <div>
+        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
+        <input v-model="form.phone" type="tel" id="phone" required placeholder="+1 234 567 890"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400" />
+        <p v-if="errors.phone" class="text-red-600 text-sm mt-1">{{ errors.phone }}</p>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+        <input v-model="form.email" type="email" id="email" required placeholder="you@example.com"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400" />
+        <p v-if="errors.email" class="text-red-600 text-sm mt-1">{{ errors.email }}</p>
+      </div>
+
+      <div>
+        <label for="course" class="block text-sm font-semibold text-gray-700 mb-1">Course Interested</label>
+        <input v-model="form.course" type="text" id="course" required placeholder="E.g. Computer Science"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400" />
+        <p v-if="errors.course" class="text-red-600 text-sm mt-1">{{ errors.course }}</p>
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Why are you interested?</label>
+        <textarea v-model="form.message" id="message" rows="4" required placeholder="Tell us about yourself..."
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 resize-none"></textarea>
+        <p v-if="errors.message" class="text-red-600 text-sm mt-1">{{ errors.message }}</p>
+      </div>
+
+      <button type="submit" :disabled="loading"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md transition duration-300 disabled:opacity-60">
+        <span v-if="loading"
+          class="inline-block animate-spin mr-2 border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+        Submit Application
+      </button>
+    </form>
+
+    <!-- Messages -->
+    <div v-if="successMessage" class="mt-6 text-green-700 bg-green-100 border border-green-300 rounded-xl p-4 text-center font-medium">
+      {{ successMessage }}
+    </div>
+    <div v-if="errorMessage" class="mt-6 text-red-700 bg-red-100 border border-red-300 rounded-xl p-4 text-center font-medium">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-xs text-gray-400 mt-10">
+      &copy; 2025 Premium Academy. All rights reserved.
+    </div>
+  </div>
+
+  <!-- Vue Script (unchanged) -->
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          form: {
+            name: '',
+            phone: '',
+            email: '',
+            course: '',
+            message: ''
+          },
+          errors: {},
+          loading: false,
+          successMessage: '',
+          errorMessage: '',
+          scriptURL: 'https://script.google.com/macros/s/AKfycbyW7sX1hOg1Ivb5RkdR2k4Jw7qNZRt60mh2sRT3MR8SWc3VaSjf-7thOE_xUuW8FXZd9Q/exec'
+        };
+      },
+      methods: {
+        validate() {
+          this.errors = {};
+          if (!this.form.name.trim()) this.errors.name = 'Full Name is required.';
+          if (!this.form.phone.trim()) this.errors.phone = 'Phone Number is required.';
+          else if (!/^\+?[\d\s\-]{7,15}$/.test(this.form.phone.trim())) this.errors.phone = 'Invalid phone number.';
+          if (!this.form.email.trim()) this.errors.email = 'Email is required.';
+          else if (!/^\S+@\S+\.\S+$/.test(this.form.email.trim())) this.errors.email = 'Invalid email address.';
+          if (!this.form.course.trim()) this.errors.course = 'Course Interested is required.';
+          if (!this.form.message.trim()) this.errors.message = 'Message is required.';
+          return Object.keys(this.errors).length === 0;
+        },
+        async submitForm() {
+          if (!this.validate()) return;
+          this.loading = true;
+          this.successMessage = '';
+          this.errorMessage = '';
+          try {
+            const formData = new FormData();
+            formData.append('name', this.form.name);
+            formData.append('phone', this.form.phone);
+            formData.append('email', this.form.email);
+            formData.append('course', this.form.course);
+            formData.append('message', this.form.message);
+
+            const res = await fetch(this.scriptURL, {
+              method: 'POST',
+              body: formData
+            });
+
+            if (!res.ok) throw new Error('Failed to submit');
+
+            this.successMessage = 'Your application has been submitted successfully! We will contact you soon.';
+            this.form.name = '';
+            this.form.phone = '';
+            this.form.email = '';
+            this.form.course = '';
+            this.form.message = '';
+          } catch (err) {
+            this.errorMessage = 'Oops! Something went wrong. Please try again later.';
+            console.error(err);
+          } finally {
+            this.loading = false;
+          }
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
